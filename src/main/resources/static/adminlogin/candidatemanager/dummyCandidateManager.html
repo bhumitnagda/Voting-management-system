@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/admin/checkLoginStatus')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.loggedIn) {
+                        // Load the main content if authenticated
+                        loadMainContent();
+                    } else {
+                        // Redirect to login page if not authenticated
+                        window.location.href = "adminlogin/adminlogin.html";
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    window.location.href = "adminlogin/adminlogin.html";
+                });
+        });
+
+        function loadMainContent() {
+            fetch('/secure/manageCandidates.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.open();
+                    document.write(html);
+                    document.close();
+
+                    // Load CSS and JS for manageCandidates page
+                    loadStylesheet('/secure/manageCandidates.css');
+                    loadScript('/secure/manageCandidates.js');
+                })
+                .catch(error => console.error('Error loading main content:', error));
+        }
+
+        // Dynamically load CSS into the document
+        function loadStylesheet(href) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = href;
+            document.head.appendChild(link);
+        }
+
+        // Dynamically load JS into the document
+        function loadScript(src) {
+            const script = document.createElement("script");
+            script.src = src;
+            script.defer = true;  // Ensures the script is loaded after the HTML is rendered
+            document.body.appendChild(script);
+        }
+    </script>
+</head>
+<body>
+<h1>Loading...</h1>
+</body>
+</html>
