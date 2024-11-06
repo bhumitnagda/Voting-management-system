@@ -1,260 +1,160 @@
+/* Main body style */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
-    background: linear-gradient(135deg, #a5f1874d, #97eb5233); /* Main background */
-    overflow-y: hidden;
-    height: 100vh;
+    justify-content: center;
+    background: linear-gradient(135deg, #f3f4f6, #dfe3e8); /* Softer background */
+    min-height: 100vh;
 }
 
-/* Header with gradient background */
+/* Header */
 .header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(90deg, #000000, #000000);
+    background-color: #333; /* Darker header */
     color: #fff;
     padding: 15px 0;
     text-align: center;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bold;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.vote-now {
-    color: #ffcc70;
-    font-size: 32px;
-    font-weight: bold;
-    text-transform: uppercase;
-    animation: flashing 1s infinite;
-}
-
-@keyframes flashing {
-    0%, 50%, 100% {
-        opacity: 1;
-    }
-    25%, 75% {
-        opacity: 0.5;
-    }
-}
-
+/* Main content */
 .main-content {
-    padding: 40px;
-    padding-top: 120px;
-    background-color: linear-gradient(135deg, #a5f187, #97eb52);
+    padding: 60px 20px;
+    padding-top: 100px;
     width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-    overflow-y: auto;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-}
-
-#vote-form {
-    background: linear-gradient(120deg, #a5f187, #97eb52); /* Changed gradient for form background */
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    max-width: 80%;
-    margin: auto;
-    line-height: 150px;
+    max-width: 800px;
+    margin: 0 auto;
     text-align: center;
 }
 
-/* Enhanced candidate labels */
-/* Light shaded candidate buttons */
+/* Form container */
+#vote-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+}
+
+/* Hide radio buttons visually but keep them accessible */
+#vote-form input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Styling for candidate labels */
 #vote-form label {
     display: inline-block;
-    width: 180px;
-    height: 180px;
-    background: linear-gradient(135deg, #eaec66, #e1ee6b); /* Light blue and green gradient */
-    color: #333; /* Darker text color for better contrast */
+    width: 150px;
+    height: 150px;
+    background: #f5f5f5;
+    color: #333;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    line-height: 180px;
-    margin: 20px;
-    border-radius: 50%;
+    line-height: 150px;
+    margin: 15px;
+    border-radius: 8px;
     cursor: pointer;
-    position: relative;
-    transition: background-color 0.4s, transform 0.4s;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Hover effect with different light colors */
+/* Styling for the selected candidate */
+#vote-form label.selected {
+    background-color: #ffcc00; /* Highlight in yellow */
+    color: #333;
+    border: 2px solid #333; /* Bold border */
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+/* Hover effect */
 #vote-form label:hover {
-    background: linear-gradient(135deg, #fcd1c7, #fff0a5); /* Light pink and yellow gradient */
-    transform: scale(1.15);
+    background-color: #ffcc00;
+    color: #333;
+    transform: scale(1.05);
 }
 
-/* Radio button styling */
-#vote-form input[type="radio"] {
-    display: none;
-}
-
-/* Border and background change for selected candidate */
-#vote-form input[type="radio"]:checked + label {
-    background-color: #d4fc79; /* Light green background */
-    border: 3px solid #333; /* Darker border */
-    color: white; /* White text */
-}
-
-
-/* Submit button with hover effect */
+/* Submit button */
 #vote-form button {
-    background-color: #ff5733;
-    color: white;
+    background-color: #007bff;
+    color: #fff;
     font-size: 18px;
-    font-weight: bold;
-    padding: 15px 30px;
+    padding: 12px 28px;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 #vote-form button:hover {
-    background-color: #c70039;
-    transform: scale(1.1);
+    background-color: #0056b3;
 }
 
+/* Vote message */
 .vote-message {
-    text-align: center;
     font-size: 20px;
-    margin-top: 20px;
-    color: #333;
-    animation: pulse 1s infinite;
+    margin-top: 30px;
+    color: #555;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-/* Easter egg hidden message */
+/* Hidden easter egg */
 .hidden-message {
     display: none;
-    text-align: center;
     font-size: 18px;
-    color: #ff5733;
-    margin-top: 20px;
+    color: #007bff;
+    margin-top: 15px;
 }
 
 .hidden-message.active {
     display: block;
-    animation: reveal 1s ease-in-out;
+    animation: fadeIn 1s ease;
 }
 
-@keyframes reveal {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Confetti animation */
-@keyframes confetti {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
 }
 
 .confetti {
-    position: fixed;
-    top: 0;
-    left: 50%;
+    position: absolute;
     width: 10px;
     height: 10px;
-    background-color: #ffcc70;
-    animation: confetti 2s linear infinite;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall 5s forwards;
 }
 
-h1 {
-    font-size: 34px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-p {
-    font-size: 18px;
-    color: #666;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Sidebar navigation */
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 60px;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff5733, #c70039);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 1000;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li a {
-    display: block;
-    padding: 20px;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.sidebar ul li a:hover {
-    background-color: #900c3f;
-    transform: scale(1.1);
-    text-shadow: 0px 0px 8px white;
-}
-
-/* Candidate buttons without 'info' */
-.candidate-info {
-    display: inline-block;
-    width: 150px;
-    height: 150px;
-    background-color: #ff5733; /* Orange button */
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 150px;
-    margin: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Hover effect without showing extra 'info' */
-.candidate-info:hover {
-    background-color: #c70039; /* Darker red */
-    transform: scale(1.1);
-}
-
-/* Remove the unnecessary span from HTML or don't display it */
-.candidate-info span {
-    display: none; /* Ensures 'info' doesn't appear */
+@keyframes fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg);
+    }
 }
 

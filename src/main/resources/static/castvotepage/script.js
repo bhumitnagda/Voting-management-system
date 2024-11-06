@@ -9,6 +9,23 @@ let votes = {};
                  window.location.href = '/'; // Redirect to login page if not logged in
              }
          })();
+document.addEventListener('DOMContentLoaded', function() {
+    const radioButtons = document.querySelectorAll('#vote-form input[type="radio"]');
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Remove 'selected' class from all labels
+            const labels = document.querySelectorAll('#vote-form label');
+            labels.forEach(label => label.classList.remove('selected'));
+
+            // Ensure the label exists before applying class
+            const label = document.querySelector(`label[for=${this.id}]`);
+            if (label) {
+                label.classList.add('selected');
+            }
+        });
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
@@ -62,26 +79,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(result);  // Display the error message returned by the server
             }
         } catch (error) {
-            alert("An error occurred. Please try again." + error);
+            console.log("An error occurred. Please report to the authorities." + error);
         }
     });
 });
 
 function displayConfetti() {
-    const confettiCount = 150;
+    const confettiCount = 300;
     const confettiContainer = document.createElement('div');
+    confettiContainer.classList.add('confetti-container'); // Add the container class for positioning
     document.body.appendChild(confettiContainer);
 
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
-        confetti.style.left = `${Math.random() * 100}vw`;
-        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        confetti.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`; // Random color
+        confetti.style.animationDuration = `${Math.random() * 4 + 2}s`; // Random fall duration
         confettiContainer.appendChild(confetti);
     }
 
     setTimeout(() => {
-        confettiContainer.remove(); // Remove confetti after animation
+        confettiContainer.remove(); // Remove the confetti container after animation ends
     }, 10000); // 10-second duration
 }

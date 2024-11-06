@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 public class VoteController {
@@ -32,8 +34,12 @@ public class VoteController {
         vote.setStudentId(user.getId());
         vote.setCandidateId(candidateId);
         vote.setPositionId(positionId);
-        voteService.saveVote(vote);
 
+        // Log vote details before saving
+        System.out.println("Casting vote for user: " + user.getId() + ", candidate: " + candidateId + ", position: " + positionId);
+
+        voteService.saveVote(vote);
         return ResponseEntity.ok("Vote cast successfully");
     }
+
 }

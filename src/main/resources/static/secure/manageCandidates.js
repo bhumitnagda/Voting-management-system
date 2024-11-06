@@ -35,21 +35,28 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", () => {
         fetch('/api/admin/logout', { method: 'POST' })
             .then(() => {
-                window.location.href = "adminlogin/adminlogin.html";
+                window.location.href = "/adminlogin/adminlogin.html";
             })
             .catch(error => console.error('Logout error:', error));
     });
 
-    // Fetch candidates and render
     function fetchCandidates() {
         fetch('/candidates')
             .then(response => response.json())
             .then(candidates => {
                 candidateList.innerHTML = '';
-                candidates.forEach(candidate => {
-                    const listItem = createCandidateElement(candidate);
-                    candidateList.appendChild(listItem);
-                });
+
+                // Fetch vote counts and then render candidates with counts
+                fetch('/candidates/voteCounts')
+                    .then(response => response.json())
+                    .then(voteCounts => {
+                        candidates.forEach(candidate => {
+                            const voteCount = voteCounts[candidate.id] || 0;
+                            const listItem = createCandidateElement(candidate, voteCount);
+                            candidateList.appendChild(listItem);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching vote counts:', error));
             })
             .catch(error => console.error('Error fetching candidates:', error));
     }
@@ -74,11 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Create a candidate list item
-    function createCandidateElement(candidate) {
+    function createCandidateElement(candidate, voteCount) {
         const listItem = document.createElement("li");
         listItem.className = "candidate-item";
         listItem.innerHTML = `
-            <span>Name: ${candidate.name}, Age: ${candidate.age}</span>
+            <span>Name: ${candidate.name}, Age: ${candidate.age}, Votes: ${voteCount}</span>
             <button class="delete-btn" data-id="${candidate.id}">Delete</button>
         `;
         const deleteButton = listItem.querySelector(".delete-btn");
