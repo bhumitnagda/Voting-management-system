@@ -1,31 +1,11 @@
-// Object to track votes
-let votes = {};
-
 // Navigation handling
  // Check if the user is logged in before the site loads
-         (function() {
+  (function() {
              const loggedInUser = sessionStorage.getItem('loggedInUser');
              if (!loggedInUser) {
                  window.location.href = '/'; // Redirect to login page if not logged in
              }
          })();
-document.addEventListener('DOMContentLoaded', function() {
-    const radioButtons = document.querySelectorAll('#vote-form input[type="radio"]');
-
-    radioButtons.forEach(radio => {
-        radio.addEventListener('change', function() {
-            // Remove 'selected' class from all labels
-            const labels = document.querySelectorAll('#vote-form label');
-            labels.forEach(label => label.classList.remove('selected'));
-
-            // Ensure the label exists before applying class
-            const label = document.querySelector(`label[for=${this.id}]`);
-            if (label) {
-                label.classList.add('selected');
-            }
-        });
-    });
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
@@ -33,19 +13,27 @@ document.addEventListener('DOMContentLoaded', function() {
         return; // Stop further execution if not logged in
     }
 
-    // Fetch candidates from the backend
+ // Fetch candidates and populate the vote form with hover tooltips
     fetch('/candidates')
         .then(response => response.json())
         .then(data => {
-            const voteForm = document.getElementById('vote-form');
-            voteForm.innerHTML = '<input type="hidden" id="position-id" value="1">'; // Add hidden input for position ID
+            const candidatesList = document.getElementById('candidates-list');
+            candidatesList.innerHTML = '';
             data.forEach(candidate => {
                 const label = document.createElement('label');
-                label.innerHTML = `<input type="radio" name="candidate" value="${candidate.id}"> ${candidate.name}`;
-                voteForm.appendChild(label);
-                votes[candidate.name] = 0; // Initialize votes for each candidate
+                label.setAttribute('for', `candidate-${candidate.id}`);
+                label.classList.add('candidate-info');
+
+                // Add candidate radio input with hover effect for bio
+                label.innerHTML = `
+                    <input type="radio" id="candidate-${candidate.id}" name="candidate" value="${candidate.id}">
+                    <span class="tooltip">${candidate.name}
+                        <span class="tooltiptext">${candidate.details}</span>
+                    </span>
+                `;
+                candidatesList.appendChild(label);
             });
-            voteForm.appendChild(document.createElement('button')).innerText = 'Submit Vote';
+            attachVoteClickListeners();
         })
         .catch(error => console.error('Error:', error));
 
@@ -102,4 +90,18 @@ function displayConfetti() {
     setTimeout(() => {
         confettiContainer.remove(); // Remove the confetti container after animation ends
     }, 10000); // 10-second duration
+}
+
+// Attach click listeners to radio buttons to handle selection
+function attachVoteClickListeners() {
+    const labels = document.querySelectorAll('#vote-form label');
+    labels.forEach(label => {
+        label.addEventListener('click', function() {
+            // Remove 'selected' class from all labels
+            labels.forEach(l => l.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked label
+            this.classList.add('selected');
+        });
+    });
 }

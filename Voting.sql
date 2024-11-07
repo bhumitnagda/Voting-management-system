@@ -1,10 +1,11 @@
-Create Database Voting;
+Create Database voting;
 Use Voting;
 Select * FROM student;
 select * from Candidates;
 select * from admin;
 insert into admin
 values("7759792e-d9d8-49d4-9d25-908c3836c4c2","$2a$12$uF3AFmAfWbesT1/AikdtF.NRzA4fSazYeMZrC7hH6xqTDYPvN2leG");
+ -- password noob123
 
 -- manage candidates script
 /*
@@ -28,3 +29,5 @@ values("7759792e-d9d8-49d4-9d25-908c3836c4c2","$2a$12$uF3AFmAfWbesT1/AikdtF.NRzA
             });
     });
     */
+select * from votes;
+    

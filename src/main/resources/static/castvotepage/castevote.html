@@ -7,33 +7,29 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<!-- Flashing and moving "Vote Now" text -->
 <div class="header">
     <marquee behavior="scroll" direction="left" scrollamount="10">
         <span class="vote-now">VOTE NOW</span>
     </marquee>
 </div>
 
-<!-- Main content area -->
 <div class="main-content">
-    <!-- Voting Dashboard -->
     <div id="dashboard">
         <h1>Cast Your Vote</h1>
         <form id="vote-form">
-            <input type="hidden" id="position-id" value="1"> <!-- Example position ID -->
+            <input type="hidden" id="position-id" value="1">
             <div id="candidates-list">
-                <!-- Example candidates -->
-                <input type="radio" id="candidate1" name="candidate" value="Candidate 1">
-                <label for="candidate1" class="candidate-info">Candidate 1</label>
-
-                <input type="radio" id="candidate2" name="candidate" value="Candidate 2">
-                <label for="candidate2" class="candidate-info">Candidate 2</label>
+                <!-- Candidate information will be dynamically populated here -->
             </div>
-            <button type="submit">Submit Vote</button>
+            <!-- Submit button wrapped in a container for right-middle alignment -->
+            <div class="submit-btn-container">
+                <button type="submit" id="submit-btn">Submit Vote</button>
+            </div>
         </form>
         <div class="vote-message">Click on a candidate to cast your vote</div>
     </div>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>

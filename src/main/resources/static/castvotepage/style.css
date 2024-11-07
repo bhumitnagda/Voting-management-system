@@ -40,9 +40,12 @@ body {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    max-width: 700px;
+    max-width: 1000px;  /* Increased width */
     margin: auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Hide radio buttons visually but keep them accessible */
@@ -65,15 +68,15 @@ body {
     margin: 15px;
     border-radius: 8px;
     cursor: pointer;
+    position: relative;
     transition: transform 0.3s, background-color 0.3s, color 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the selected candidate */
+/* Selected label styling */
 #vote-form label.selected {
     background-color: #ffcc00; /* Highlight in yellow */
     color: #333;
-    border: 2px solid #333; /* Bold border */
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
@@ -85,8 +88,45 @@ body {
     transform: scale(1.05);
 }
 
-/* Submit button */
-#vote-form button {
+/* Tooltip styling */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Hidden tooltiptext by default */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: -120px; /* Adjusted to appear at the bottom-right of the candidate box */
+    right: 0;
+    opacity: 60;
+    transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when hovering */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Submit button aligned to the right-middle of the candidate boxes */
+.submit-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    padding-right: 70px; /* Ensure there’s some padding on the right */
+    margin-top: 20px;  /* Adjust the margin for spacing */
+}
+
+#submit-btn {
     background-color: #007bff;
     color: #fff;
     font-size: 18px;
@@ -94,12 +134,11 @@ body {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    margin-top: 20px;
     transition: background-color 0.3s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-#vote-form button:hover {
+#submit-btn:hover {
     background-color: #0056b3;
 }
 
@@ -158,3 +197,15 @@ body {
     }
 }
 
+/* Box styles */
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    margin: 20px auto;
+}
+
+/* Active state for box */
+.active {
+    background-color: yellow; /* Change to yellow when active */
+}

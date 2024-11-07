@@ -57,6 +57,13 @@ h1, h2 {
   border-radius: 5px;
   margin-right: 10px;
 }
+#candidateDetails {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+}
 #candidateAge {
   width: 70%;
   padding: 10px;

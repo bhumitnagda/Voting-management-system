@@ -15,6 +15,9 @@ public class Candidates {
     @Column(name = "NAME")
     private String name ;
 
+    @Column(name = "DETAILS")
+    private String details ;
+
     @Column(name = "AGE")
     private int age;
 }

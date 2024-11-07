@@ -9,7 +9,7 @@ body {
     height: 100vh;
     color: #333;
     transition: background 0.3s ease-in-out;
-    background-image: url('vote.avif'); /* Add your image here */
+    background-image: url('vote.png'); /* Add your image here */
     background-size: cover;
     background-position: center;
 }
@@ -21,7 +21,7 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     width: 320px;
     text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: popIn 0.6s ease-in-out; /* New animation */
 }
 
 h2 {
@@ -53,25 +53,26 @@ h2 {
 }
 
 .input-box input:focus {
-    border-color: #4CAF50;
+    border-color: #333;
     outline: none;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: #00796B; /* Updated to Teal */
     color: #fff;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add subtle animation */
 }
 
 button:hover {
-    background-color: #45a049;
+    transform: scale(1.05); /* Slight scale up */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
 }
 
 p {
@@ -90,14 +91,15 @@ a:hover {
     text-decoration: underline;
 }
 
-@keyframes fadeIn {
-    from {
+/* New pop-in animation for container */
+@keyframes popIn {
+    0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: scale(0.8);
     }
-    to {
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }
 

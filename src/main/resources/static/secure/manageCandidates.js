@@ -17,17 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const candidateNameInput = document.getElementById("candidateName");
     const candidateAgeInput = document.getElementById("candidateAge");
     const candidateList = document.getElementById("candidateList");
+    const candidateDetailsInput = document.getElementById("candidateDetails");
     const logoutBtn = document.querySelector(".logout-btn");
 
     // Add candidate event
     addCandidateBtn.addEventListener("click", () => {
         const candidateName = candidateNameInput.value.trim();
         const candidateAge = parseInt(candidateAgeInput.value.trim());
+        const candidateDetails = candidateDetailsInput.value.trim();
 
-        if (candidateName && candidateAge) {
-            addCandidate({ name: candidateName, age: candidateAge });
+        if (candidateName && candidateAge && candidateDetails) {
+            addCandidate({ name: candidateName, details: candidateDetails, age: candidateAge });
         } else {
-            alert("Please enter both candidate name and age.");
+            alert("Please enter candidate name, details and age.");
         }
     });
 
@@ -72,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(response => response.json())
         .then(addedCandidate => {
-            const listItem = createCandidateElement(addedCandidate);
+            const listItem = createCandidateElement(addedCandidate, 0);
             candidateList.appendChild(listItem);
             candidateNameInput.value = '';
             candidateAgeInput.value = '';
+            candidateDetailsInput.value = '';
         })
         .catch(error => console.error('Error adding candidate:', error));
     }
